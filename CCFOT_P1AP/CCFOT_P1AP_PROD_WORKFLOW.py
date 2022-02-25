@@ -6,7 +6,7 @@ from airflow.operators.dummy_operator import DummyOperator
 from airflow.models import DAG, Variable
 from airflow.utils.dates import days_ago
 
-CRON = '5 0 * * *'
+CRON = '5 21 * * *'
 
 dag_default_args = {
     'owner': 'airflow',
