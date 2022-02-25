@@ -6,7 +6,7 @@ from airflow.operators.dummy_operator import DummyOperator
 from airflow.models import DAG, Variable
 from airflow.utils.dates import days_ago
 
-CRON = '5 0 * * *'
+CRON = '5 21 * * *'
 
 dag_default_args = {
     'owner': 'airflow',
@@ -90,10 +90,11 @@ FINISH_WORKFLOW = DummyOperator(
     task_id='FINISH_WORKFLOW',
     trigger_rule='all_success'
 )
-
+'''
 trigger_CCFOT_P1AP_PROD_0_START.set_upstream(INIT_WORKFLOW)
 trigger_CCFOT_P1AP_PROD_1_LOAD.set_upstream(trigger_CCFOT_P1AP_PROD_0_START)
-trigger_CCFOT_P1AP_PROD_2_STAGE.set_upstream(trigger_CCFOT_P1AP_PROD_1_LOAD)
+'''
+trigger_CCFOT_P1AP_PROD_2_STAGE.set_upstream(INIT_WORKFLOW)
 trigger_CCFOT_P1AP_PROD_3_HUB_MULTI.set_upstream(trigger_CCFOT_P1AP_PROD_2_STAGE)
 trigger_CCFOT_P1AP_PROD_3_LINK_MULTI.set_upstream(trigger_CCFOT_P1AP_PROD_2_STAGE)
 trigger_CCFOT_P1AP_PROD_3_SAT_SINGLE.set_upstream(trigger_CCFOT_P1AP_PROD_2_STAGE)
